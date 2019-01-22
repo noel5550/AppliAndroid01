@@ -16,10 +16,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -27,8 +30,8 @@ public class SecondActivity extends AppCompatActivity {
     SmsManager smsManager;
     String message ="bonjour";
 
-    private final String numero = "0658406185";
-    //private final String numero = "0650664099";
+    //private final String numero = "0658406185";
+    private final String numero = "0650664099";
 
 
     // verification des permissions
@@ -42,6 +45,7 @@ public class SecondActivity extends AppCompatActivity {
     LocationListener locationListener;
     boolean sendFlag = false;
 
+    Timer timer;
 
 
 
@@ -53,7 +57,6 @@ public class SecondActivity extends AppCompatActivity {
         smsManager = SmsManager.getDefault();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        textView.setText(numero);
 
         if (ContextCompat.checkSelfPermission(SecondActivity.this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED){
@@ -72,7 +75,6 @@ public class SecondActivity extends AppCompatActivity {
                     ,Manifest.permission.ACCESS_COARSE_LOCATION},REQUEST_GPS_LOCATION);
 
             recreate();
-
 
         }
 
@@ -95,7 +97,21 @@ public class SecondActivity extends AppCompatActivity {
                         smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(numero, null, message, null, null);
                         sendFlag = true;
-                        finish();
+
+                        textView.append(adress);
+                        // on attend 5s avant de fermer l'application
+                        Toast.makeText(SecondActivity.this, "Message envoyé", Toast.LENGTH_LONG).show();
+                        timer = new Timer();
+                        timer.schedule(new TimerTask() { // la classe timerTask permet de faire des actions, evenement aprés un certain temps
+                            @Override
+                            public void run() {
+                                // on fait la transition d'activités, la classe intent permet de faire ce changement
+                                timer.cancel();
+                                finish();
+                                moveTaskToBack(true);
+
+                            }
+                        },5000);
                     }
                 }
 
