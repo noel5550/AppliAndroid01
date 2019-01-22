@@ -37,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
                 // on commence l'activité de changement d'activité
                 startActivity(intent);
                 finish();
+
             }
         },5000);
     }
 
 
     public void exitClick(View view) {
+
+        timer.cancel();
         finish();
+        moveTaskToBack(true);
     }
 }
