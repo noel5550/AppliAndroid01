@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/infoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="startPopupActivity"
+            android:text="information"
+            android:layout_alignParentTop="true"
+            />
+
+        <Button
+            android:id="@+id/btnPompier"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:background="@drawable/iconepompiers"
+            android:onClick="messagePompier"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/infoBtn"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"/>
+
+
+        <Button
+            android:id="@+id/btnAmbulance"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:background="@drawable/iconesamu"
+            android:onClick="messageAmbulance"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/infoBtn"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"/>
+
+
+        <Button
+            android:id="@+id/btnPolice"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+            android:background="@drawable/iconepolice"
+            android:onClick="messagePolice"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btnPompier"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/btnOtage"
+            android:layout_width="170dp"
+            android:layout_height="150dp"
+
+            android:background="@drawable/iconeotage"
+            android:onClick="messageOtage"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnPompier"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"/>
+
+
+
+        <Button
+            android:id="@+id/btnAnnuler"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/iconeannuler"
+            android:onClick="quitter"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="60dp" />
+
+    </RelativeLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

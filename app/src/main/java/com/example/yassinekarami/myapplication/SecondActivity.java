@@ -13,8 +13,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +29,12 @@ import java.util.TimerTask;
 
 public class SecondActivity extends AppCompatActivity {
 
-    TextView textView;
+
     SmsManager smsManager;
     String message ="bonjour";
-
-    //private final String numero = "0658406185";
-    private final String numero = "0650664099";
+    ProgressBar progressBar;
+    private String numero = "0658406185";
+  //  private final String numero = "0650664099";
 
 
     // verification des permissions
@@ -53,9 +56,16 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
-        textView = (TextView)findViewById(R.id.text_view);
+
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        progressBar = findViewById(R.id.progressBar);
+        ImageAdapter adapter = new ImageAdapter(this);
+        viewPager.setAdapter(adapter);
+
         smsManager = SmsManager.getDefault();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
 
 
         if (ContextCompat.checkSelfPermission(SecondActivity.this, Manifest.permission.SEND_SMS)
@@ -65,7 +75,6 @@ public class SecondActivity extends AppCompatActivity {
             recreate();
 
         }
-
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -77,6 +86,7 @@ public class SecondActivity extends AppCompatActivity {
             recreate();
 
         }
+
 
         // récupération des donnés GPS
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION ))
@@ -90,28 +100,18 @@ public class SecondActivity extends AppCompatActivity {
                     myLatitude = location.getLatitude();
                     myLongitude = location.getLongitude();
                     adress = getAdress(myLatitude,myLongitude);
-                    message = getAdress(myLatitude,myLongitude);
+                    message =  getAdress(myLatitude,myLongitude);
 
                     if (!sendFlag)
                     {
+                        message =  getAdress(myLatitude,myLongitude);
                         smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage(numero, null, message, null, null);
+
+                        smsManager.sendTextMessage(numero, null, message , null, null);
                         sendFlag = true;
 
-                        textView.append(adress);
-                        // on attend 5s avant de fermer l'application
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(SecondActivity.this, "Message envoyé", Toast.LENGTH_LONG).show();
-                        timer = new Timer();
-                        timer.schedule(new TimerTask() { // la classe timerTask permet de faire des actions, evenement aprés un certain temps
-                            @Override
-                            public void run() {
-                                // on fait la transition d'activités, la classe intent permet de faire ce changement
-                                timer.cancel();
-                                finish();
-                                moveTaskToBack(true);
-
-                            }
-                        },5000);
                     }
                 }
 
@@ -148,16 +148,21 @@ public class SecondActivity extends AppCompatActivity {
 
     private String getAdress(double latitude, double longitude)
     {
-        String adress ="";
+        String choixUtilisateur = getIntent().getStringExtra("choixUtilisateur");
+        String adress ="Besoin de "+choixUtilisateur+" à l'adresse : ";
+        String result = "";
+
         Geocoder geocoder = new Geocoder(SecondActivity.this, Locale.getDefault());
         try
         {
             List<Address> adresseList = geocoder.getFromLocation(latitude,longitude,1);
-            adress = adresseList.get(0).getAddressLine(0);
+            // concatenation
+            result = adress.concat(adresseList.get(0).getAddressLine(0));
+
         }catch(IOException e )
         {
-            textView.setText("erreur localisation");
-        };
-        return adress;
+            Toast.makeText(SecondActivity.this, "erreur localication", Toast.LENGTH_LONG).show();
+        }
+        return  result;
     }
 }
