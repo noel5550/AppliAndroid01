@@ -23,4 +23,9 @@
     </style>
 
 
+    <style name="AppTheme.MyDarkTheme">
+        <item name="android:colorBackground">@color/colorPrimaryDark</item>
+    </style>
+
+
 </resources>

@@ -19,4 +19,5 @@ public class PopupActivity extends Activity {
 
         getWindow().setLayout((int)(width*0.8), (int)(height*0.7));
     }
+
 }

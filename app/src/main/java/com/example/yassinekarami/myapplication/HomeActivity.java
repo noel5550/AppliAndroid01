@@ -3,6 +3,7 @@ package com.example.yassinekarami.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,9 +19,13 @@ public class HomeActivity extends AppCompatActivity {
     String choixUtilisateur;
     Timer timer;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         setContentView(R.layout.activity_home);
 
         btnPompier = (Button)findViewById(R.id.btnPompier);
@@ -33,7 +38,11 @@ public class HomeActivity extends AppCompatActivity {
     public void messagePompier(View view) {
         choixUtilisateur = "Pompier";
         startSecondActivity();
+    }
 
+    public void messageAccident(View view) {
+        choixUtilisateur = "Pompier et police";
+        startSecondActivity();
     }
 
     public void messagePolice(View view) {
@@ -65,9 +74,14 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void startPopupActivity(View view) {
+
         // on fait la transition d'activités, la classe intent permet de faire ce changement
         Intent intent = new Intent(HomeActivity.this, PopupActivity.class);
         // on commence l'activité de changement d'activité
         startActivity(intent);
+
+
     }
+
+
 }
