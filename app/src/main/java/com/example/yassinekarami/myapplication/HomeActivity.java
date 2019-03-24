@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void messageAccident(View view) {
-        choixUtilisateur = "Pompier et police";
+        choixUtilisateur = "Pompier,samu et police";
         startSecondActivity();
     }
 

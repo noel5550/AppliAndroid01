@@ -13,6 +13,24 @@
          android:layout_height="match_parent"
          android:orientation="vertical">
 
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+             <TextView
+                 android:layout_width="70dp"
+                 android:layout_height="70dp"
+                 android:background="@drawable/iconesamu"
+                 android:layout_margin="20dp"/>
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Contacter le SAMU"
+                 android:layout_margin="20dp"
+                 android:layout_gravity="center"/>
+         </LinearLayout>
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent">
@@ -25,7 +43,7 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="appelle les pompiers"
+                 android:text="Contacter les pompiers pour un incendie"
                  android:layout_margin="20dp"
                  android:layout_gravity="center"/>
          </LinearLayout>
@@ -42,27 +60,12 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="appelle la police"
+                 android:text="Contacter la police"
                  android:layout_margin="20dp"
                  android:layout_gravity="center"/>
          </LinearLayout>
 
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
 
-             <TextView
-                 android:layout_width="70dp"
-                 android:layout_height="70dp"
-                 android:background="@drawable/iconesamu"
-                 android:layout_margin="20dp"/>
-             <TextView
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="apelle le samu"
-                 android:layout_margin="20dp"
-                 android:layout_gravity="center"/>
-         </LinearLayout>
 
          <LinearLayout
              android:layout_width="match_parent"
@@ -76,7 +79,7 @@
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="appelle les pompiers et la police pour un accident"
+                 android:text="Contacter les pompiers, le SAMU et la police pour un accident"
                  android:layout_margin="20dp"
                  android:layout_gravity="center"/>
          </LinearLayout>
@@ -87,15 +90,16 @@
 
              <TextView
                  android:layout_width="70dp"
-                 android:layout_height="70dp"
-                 android:background="@drawable/iconeannuler"
-                 android:layout_margin="20dp"/>
+                 android:layout_height="50dp"
+                 android:background="@drawable/iconeannuler2"
+                 android:layout_margin="20dp" />
              <TextView
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:text="ferme l'application"
+                 android:text="Ferme l'application"
                  android:layout_margin="20dp"
                  android:layout_gravity="center"/>
+
          </LinearLayout>
 
 

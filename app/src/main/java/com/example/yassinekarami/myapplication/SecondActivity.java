@@ -47,26 +47,34 @@ public class SecondActivity extends AppCompatActivity {
     String adress = "";
     LocationListener locationListener;
     boolean sendFlag = false;
+    String choixUtilisateur = null;
 
-    Timer timer;
-
-
+    private ImageAdapter adapter = null;
+    private int[] imageSamu = new int[]{R.drawable.slidesamu1,R.drawable.slidesamu2,R.drawable.slidesamu3};
+    private int[] imagePompier = new int []{R.drawable.slidepompiers1, R.drawable.slidepompiers2, R.drawable.slidepompiers3};
+    private int[] imagePolice = new int []{R.drawable.slidepolice1, R.drawable.slidepolice2, R.drawable.slidepolice3};
+    private int[] imageAccident = new int[]{R.drawable.slideaccident1, R.drawable.slideaccident2, R.drawable.slideaccident3};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        choixUtilisateur = getIntent().getStringExtra("choixUtilisateur");
         ViewPager viewPager = findViewById(R.id.viewPager);
         progressBar = findViewById(R.id.progressBar);
-        ImageAdapter adapter = new ImageAdapter(this);
+        switch (choixUtilisateur)
+        {
+            case "Pompier":  adapter = new ImageAdapter(this , imagePompier);break;
+            case "Pompier,samu et police" : break;
+            case "Police" : adapter = new ImageAdapter(this,imagePolice); break;
+            case "Ambulance" : adapter = new ImageAdapter(this , imageSamu); break;
+        }
+
         viewPager.setAdapter(adapter);
 
         smsManager = SmsManager.getDefault();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-
-
 
         if (ContextCompat.checkSelfPermission(SecondActivity.this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED){
