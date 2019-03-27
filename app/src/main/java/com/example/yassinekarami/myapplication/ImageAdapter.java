@@ -9,13 +9,13 @@ import android.widget.ImageView;
 public class ImageAdapter extends PagerAdapter {
 
     private Context mContext;
-    //private int[] mImageIds = new int[]{R.drawable.patate1,R.drawable.patate2,R.drawable.patate3,R.drawable.patate4};
+    private int[] mImageIds;
 
-    private int[] mImageIds = null;
     ImageAdapter(Context context , int []image) {
         mContext = context;
         mImageIds = image;
     }
+
 
     @Override
     public int getCount() {
@@ -29,10 +29,14 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+
+
         ImageView imageView = new ImageView(mContext);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(mImageIds[position]);
         container.addView(imageView, 0);
+
+
         return imageView;
     }
 
